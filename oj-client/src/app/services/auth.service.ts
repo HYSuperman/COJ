@@ -74,14 +74,15 @@ export class AuthService {
   public resetPassword(): void {
     let profile = this.getProfile();
     let url: string = `https://${this.domain}/dbconnections/change_password`;
-    let headers = new Headers({ 'content-type': 'application/json' });
+    //let headers = new Headers({ 'content-type': 'application/json' });
     let body = {
       client_id: this.clientId,
       email: profile.email,
-      connection: 'Username-Password-Authentication'
+      connection: 'Username-Password-Authentication',
+      json: true
     }
 
-    this.http.post(url, body, headers)
+    this.http.post(url, body)
       .toPromise()
       .then((res: Response) => {
         console.log(res.json());
